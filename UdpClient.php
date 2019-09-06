@@ -1,6 +1,14 @@
 <?php
 
-function udpGet($sendMsg = '', $ip = '10.138.6.61', $port = '14099'){
+/**
+ * 测试发送UDP消息
+ * @param string $sendMsg
+ * @param string $ip
+ * @param string $port
+ *
+ * @return bool|string
+ */
+function udpGet($sendMsg = '', $ip = '10.138.6.61', $port = '8080'){
     $handle = stream_socket_client("udp://{$ip}:{$port}", $errno, $errstr);
     if( ! $handle){
         die("ERROR: {$errno} - {$errstr}\n");
@@ -13,11 +21,5 @@ function udpGet($sendMsg = '', $ip = '10.138.6.61', $port = '14099'){
     return $result;
 }
 
-try {
-    $result = udpGet('Hello World');
-
-    var_export($result);
-} catch (\Exception $e) {
-    var_export($e->getMessage());
-}
+echo udpGet('Hello World');
 
